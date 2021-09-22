@@ -1,27 +1,43 @@
-# AngularArquitectura
+# Arquitectura en Angular 🖥️
+Este proyecto tiene como finalidad mostrar una arquitectura escalable y  modular tomando las mejores practicas de Angular y la programación en general.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
+## Sobre la modularidad 📖
+La arquitectura consiste en hacer todo modular, esto permite que la aplicación crezca sin conflicto de escalabilidad, haciendo reutilizables todo los módulos y lo que estas contienen. No solo es buena practicar crear proyectos modulares para su escalabilidad en angular, si no en mayor parte de los lenguajes, framewok o librerías, aun que es un hecho que angular tiene mejor estructurada la visión de la modularidad.
 
-## Development server
+## Estructura de la arquitectura 🏗️
+- app (Carpeta raiz)
+    - core (Carpeta de servicios globales)
+    - users (Modulo)
+        - components (Carpeta contenedora de componentes)
+            - index (Componente)
+            - form (Componente)
+        - services (Carpeta contenedora de servicios)
+        - models (Carpeta contenedora de modelos(interfaces))
+    - tasks (Modulo)
+        - components (Carpeta contenedora de componentes)
+            - index
+            - form
+        - services (Carpeta contenedora de servicios)
+        - models (Carpeta contenedora de modelos(interfaces))
+    - shared (Modulo)
+        - header (Componente)
+        - footer (Componente)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Por buena practica los nombres de variables, funciones, clases, carpetas etc se nombran en ingles por lenguaje global, aun que depende de la empresa.
 
-## Code scaffolding
+## Tecnologias
+- Angular 12.2.6
+    - TypeScript 4.3.5
+    - rxjs 6.6.7
+- Bootstrap 5.1.1
+    - Bootstrapwatch - Lux 5.0
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Requisitos
+- nodejs 14.14.6
+- npm 7.10.0
+- angular CLI 12.2.6
 
-## Build
+## Ejecutar
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Escrito por
+GitHub: [Moises Arrona](https://github.com/moisesarrona)
