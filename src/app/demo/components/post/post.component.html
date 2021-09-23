@@ -1,0 +1,67 @@
+<section>
+    <div class="container">
+        <!-- title -->
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <p class="small mb-0 text-uppercase">About API post</p>
+                <h2>Learning about us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt distinctio eos odit officiis nihil, asperiores possimus! Ad ipsam eligendi ipsum repellat illum voluptate, ut eos. Harum esse sed consectetur perspiciatis?</p>
+                <a href="" class="btn btn-primary">
+                    Learn about us api
+                </a>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="row mb-5">
+            <div>
+                <div class="col-md-12">
+                    <div class="alert alert-info">
+                        {{ alert }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <!--<form class="mb-4" [formGroup]="form" (ngSubmit)="form.valid && createPost(form.value)">-->
+                        <form class="mb-4" [formGroup]="form" (ngSubmit)="createPost(form.value)">
+                            <div class="mb-3">
+                                <label class="form-label">title</label>
+                                <input type="text" class="form-control" name="title" formControlName="title">
+                            </div>
+
+                            <div class="alert alert-danger" *ngIf="form.controls['title'].invalid && form.controls['title'].touched">
+                                title is required.
+                            </div>
+                        
+                            <div class="mb-3">
+                                <label class="form-label">body</label>
+                                <input type="text" class="form-control" name="body" formControlName="body">
+                            </div>
+
+                            <div class="alert alert-danger" *ngIf="form.controls['body'].invalid && form.controls['body'].touched">
+                                title is required.
+                            </div>
+                        
+                            <button type="submit" class="btn btn-primary">Public</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-4" *ngFor="let post of posts">
+                    <div class="card-body">
+                        <h5 class="card-title small">{{ post.title }}</h5>
+                        <p class="card-text small">{{ post.body }}</p>
+                    </div>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" (click)="deletePost(post.id)">
+                        -
+                    </span>
+                    <span class="badge bg-success w-25 ms-auto mb-2 me-2" (click)="editMode(post)">Edit</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
