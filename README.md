@@ -5,6 +5,7 @@ Este proyecto tiene como finalidad mostrar una **arquitectura escalable** y  mod
 La arquitectura consiste en hacer todo modular, esto permite que la aplicación crezca sin conflicto de escalabilidad, haciendo reutilizables todo los módulos y lo que estas contienen. No solo es buena practicar crear proyectos modulares para su escalabilidad en angular, si no en mayor parte de los lenguajes, framewok o librerías, aun que es un hecho que angular tiene mejor estructurada la visión de la modularidad.
 
 ## Estructura de la arquitectura 🏗️
+*ejemplo*
 - app (Carpeta raiz)
     - core (Carpeta de servicios globales)
     - users (Modulo)
@@ -15,8 +16,8 @@ La arquitectura consiste en hacer todo modular, esto permite que la aplicación 
         - models (Carpeta contenedora de modelos(interfaces))
     - tasks (Modulo)
         - components (Carpeta contenedora de componentes)
-            - index
-            - form
+            - index (componente)
+            - form (componente)
         - services (Carpeta contenedora de servicios)
         - models (Carpeta contenedora de modelos(interfaces))
     - shared (Modulo)
