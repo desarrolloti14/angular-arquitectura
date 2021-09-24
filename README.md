@@ -5,26 +5,39 @@ Este proyecto tiene como finalidad mostrar una **arquitectura escalable** y  mod
 La arquitectura consiste en hacer todo modular, esto permite que la aplicación crezca sin conflicto de escalabilidad, haciendo reutilizables todo los módulos y lo que estas contienen. No solo es buena practicar crear proyectos modulares para su escalabilidad en angular, si no en mayor parte de los lenguajes, framewok o librerías, aun que es un hecho que angular tiene mejor estructurada la visión de la modularidad.
 
 ## Estructura de la arquitectura 🏗️
-*ejemplo*
+*ejemplo sobre la estrucrura de la carpeta*
 - app (Carpeta raiz)
     - core (Carpeta de servicios globales)
-    - users (Modulo)
+    - demo (Modulo)
         - components (Carpeta contenedora de componentes)
-            - index (Componente)
-            - form (Componente)
-        - services (Carpeta contenedora de servicios)
+            - post (Componente)
         - models (Carpeta contenedora de modelos(interfaces))
-    - tasks (Modulo)
+        - services (Carpeta contenedora de servicios)
+    - landing (Modulo)
         - components (Carpeta contenedora de componentes)
-            - index (componente)
-            - form (componente)
-        - services (Carpeta contenedora de servicios)
-        - models (Carpeta contenedora de modelos(interfaces))
+            - about (componente)
+            - home (componente)
+            - review (componente)
     - shared (Modulo)
         - header (Componente)
         - footer (Componente)
 
-Por buena practica los nombres de variables, funciones, clases, carpetas etc se nombran en ingles por lenguaje global, aun que depende de la empresa no hay problema si son en español, no influye en su funcionalidad.
+En este ejemplo podemos ver como el cuerpo principal del proyecto esta modularizado, permitiendo el reutilizo de los componentes, cabe mencionar que aqui se muestra solo un ejemplo la estructura pude cambiar totalmente, aun que de forma modular claro...
+
+Es buena practica nombrar variables, clases, funciones, carpetas archivos el ingles y minúsculas es por estándar y lenguaje universal, aun que el lenguaje puede cambiar, si la empresa pide nombrarlos en ingles no existe algún problema ya que no afecta a la funcionalidad.
+
+Por ultimo el proyecto contiene algunos métodos o forma de crear una interfaz grafica, que si bien sin ellos puede funcionar una aplicación, si afecta directamente en el rendimiento.
+
+## Metodos de construcción 🏗️
+- LazyLoad (Carga lenta): Consiste en no cargar de primera instancia todos los módulos, componentes servicios etc. si no cargarlos solo cuando el usuario haga la petición sin afectar el termino SPA (single page aplication).
+- Arquitectura modular: Estructura un software en pequeños pedazos para que estos sean reutilizables y la aplicación sea escalable.
+- Routing modular: Cada modulo que sea una pieza de interfaz grafica debe de tener su propia routing para enrutar sus componentes sin que este afecta al routing principal.
+- Conexión API: La conexión se realizo a una API Rest publica los métodos funcionan pero no se verán reflejados (Puedes hacer las pruebas en un Postman).
+
+## Funciones utilizadas
+- Reactive Forms
+- Observable
+- HttpModule
 
 ## Tecnologias 🛠️
 - Angular 12.2.6
