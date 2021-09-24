@@ -7,20 +7,20 @@ La arquitectura consiste en hacer todo modular, esto permite que la aplicación 
 ## Estructura de la arquitectura 🏗️
 *ejemplo sobre la estrucrura de la carpeta*
 - app (Carpeta raiz)
-    - core (Carpeta de servicios globales)
-    - demo (Modulo)
-        - components (Carpeta contenedora de componentes)
-            - post (Componente)
-        - models (Carpeta contenedora de modelos(interfaces))
-        - services (Carpeta contenedora de servicios)
-    - landing (Modulo)
-        - components (Carpeta contenedora de componentes)
-            - about (componente)
-            - home (componente)
-            - review (componente)
-    - shared (Modulo)
-        - header (Componente)
-        - footer (Componente)
+    - core (Carpeta de servicios globales) *ng g s core/api-core*
+    - demo (Modulo) *ng g m demo*
+        - components (Carpeta contenedora de componentes) *se crea manualmente*
+            - post (Componente) *ng g c demo/components/post*
+        - models (Carpeta contenedora de modelos(interfaces)) *se crea manualmente*
+        - services (Carpeta contenedora de servicios) *ng g s demo/services/api-demo*
+    - landing (Modulo) *ng g m landing*
+        - components (Carpeta contenedora de componentes) *se crea manualmente*
+            - about (componente) *ng g c landing/components/about*
+            - home (componente) *ng g c landing/components/home*
+            - review (componente) *ng g c landing/components/review*
+    - shared (Modulo) *ng g m shared*
+        - header (Componente) *ng g c shared/header*
+        - footer (Componente) *ng g c shared/footer*
 
 En este ejemplo podemos ver como el cuerpo principal del proyecto esta modularizado, permitiendo el reutilizo de los componentes, cabe mencionar que aqui se muestra solo un ejemplo la estructura pude cambiar totalmente, aun que de forma modular claro...
 
