@@ -13,16 +13,15 @@ export class PostComponent implements OnInit {
   posts: any = []
   alert: string = ""
   edit: boolean = false
-  index: number = 0
 
   post: Post = {
-    userId: 1,
-    id: 1,
+    id: 0,
     title: '',
     body: ''
   }
 
   form: FormGroup = this.fb.group({
+    id: [''],
     title: ['', Validators.required] ,
     body: ['', Validators.required]
   })
@@ -36,6 +35,7 @@ export class PostComponent implements OnInit {
   editMode(post: Post) {
     this.edit = true
     this.form.setValue({
+      id: post.id,
       title: post.title,
       body: post.body
     })
@@ -66,7 +66,7 @@ export class PostComponent implements OnInit {
           }
         )
       }else {
-        this.api.updatePost(data, this.post.id).subscribe(
+        this.api.updatePost(data, data.id).subscribe(
           res => {
             console.log("edit: " + res),
             this.getAllPost()
