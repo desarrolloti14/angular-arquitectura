@@ -61,6 +61,14 @@
                         -
                     </span>
                     <span class="badge bg-success w-25 ms-auto mb-2 me-2" (click)="editMode(post)">Edit</span>
+                    <div class="card-footer text-muted">
+                        <div>
+                            Created: <span class=" small">{{ post.created_at | date:"EEEE, MMMM d, y" }}</span>
+                        </div>
+                        <div *ngIf="post.update_at">
+                            Updated: <span class="mall">{{ post.update_at | date:"EEEE, MMMM d, y" }} </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
