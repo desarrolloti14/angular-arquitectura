@@ -5,11 +5,13 @@ import { DemoRoutingModule } from './demo-routing.module';
 import { PostComponent } from './components/post/post.component'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { IndexComponent } from './components/index/index.component';
 
 
 @NgModule({
   declarations: [
-    PostComponent
+    PostComponent,
+    IndexComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
+import { FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { Post } from '../../models/post';
 import { ApiService } from '../../service/api.service';
 
@@ -10,17 +10,20 @@ import { ApiService } from '../../service/api.service';
 })
 export class PostComponent implements OnInit {
 
+  //Variables globales
   posts: any = []
   alert: string = ""
   edit: boolean = false
 
+  //Declaramos una variable con el cuerpo de nuestro model
   post: Post = {
     id: 0,
     title: '',
     body: ''
   }
 
-  form: FormGroup = this.fb.group({
+  //Declaramos el Form group para usar nuestras validaciones
+  formPost: FormGroup = this.fb.group({
     id: [''],
     title: ['', Validators.required] ,
     body: ['', Validators.required]
@@ -32,16 +35,17 @@ export class PostComponent implements OnInit {
     this.getAllPost()
   }
 
+  //Funcion que nos ayuda a cambiar el estado de nuestro formulario
   editMode(post: Post) {
     this.edit = true
-    this.form.setValue({
+    this.formPost.setValue({
       id: post.id,
       title: post.title,
       body: post.body
     })
   }
 
-  //methods
+  //Funcion para mostrar todos los registros
   getAllPost() {
     this.api.getAllPost().subscribe(
       res => this.posts = res,
@@ -49,15 +53,20 @@ export class PostComponent implements OnInit {
     );
   }
 
+  //Funcion para crear y/o editar registros
   createPost(data: Post) {
-    this.form.markAllAsTouched();
-    if (this.form.valid) {
+    this.formPost.markAllAsTouched();
+
+    //Validamos que el formulario sea correcto
+    if (this.formPost.valid) {
+
+      //Validamos que el estado del formulario
       if (this.edit == false) {
         this.api.createPost(data).subscribe(
           res => {
             console.log("create: " + res),
               this.getAllPost()
-            this.form.reset()
+            this.formPost.reset()
             this.alert = "Your post is publish"
           },
           error => {
@@ -65,12 +74,12 @@ export class PostComponent implements OnInit {
             this.alert = "Error in send post"
           }
         )
-      }else {
+      } else {
         this.api.updatePost(data, data.id).subscribe(
           res => {
             console.log("edit: " + res),
             this.getAllPost()
-            this.form.reset()
+            this.formPost.reset()
             this.alert = "Your post is edit"
           },
           error => {
@@ -83,6 +92,7 @@ export class PostComponent implements OnInit {
     }
   } 
 
+  //Funcion para eliminar registros
   deletePost(id :number) {
     this.api.deletePost(id).subscribe(
       res => { 
