@@ -11,7 +11,7 @@ export class ApiService {
 
   constructor( private http:HttpClient ) { }
 
-  //Metodos CRUD para las peticiones
+  //Metodos CRUD para las peticiones posts
   getAllPost() {
     return this.http.get(this.url + "posts");
   }
@@ -30,5 +30,18 @@ export class ApiService {
 
   deletePost(id: number) {
     return this.http.delete(this.url + "posts/" + id);
+  }
+
+  //Metodos CRUD para las peticiones comments
+  getComment(id: number) {
+    return this.http.get(this.url + "comments/" + id)
+  }
+
+  createComment(comment: Comment) {
+    return this.http.post(this.url + "comments/", comment);
+  }
+
+  deleteComment(id: number) {
+    return this.http.delete(this.url + "comments/" + id);
   }
 }

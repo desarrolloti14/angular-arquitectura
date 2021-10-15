@@ -1,0 +1,20 @@
+<div class="mb-4 ps-4" *ngFor="let comment of comments">
+    <div class="blockquote-footer position-relative">
+        <cite class="Source Title mb-0">{{ comment.comment }}</cite>
+        <div class="small text-muted">
+            created: <span class=" small">{{ comment.created_at }}</span>
+        </div>
+        <span class="position-absolute top-50 start-0 translate-middle badge rounded-pill bg-danger" (click)="deleteComment(comment.id)">
+            -
+        </span>
+    </div>
+</div>
+
+<form [formGroup]="formComment" (ngSubmit)="createComment(formComment.value)">
+    <div class="mb-3">
+        <label class="form-label">Comment</label>
+        <input type="text" class="form-control" name="comment" formControlName="comment">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

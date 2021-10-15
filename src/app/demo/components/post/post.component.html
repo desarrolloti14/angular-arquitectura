@@ -65,16 +65,17 @@
             <span class="badge bg-success w-25 ms-auto mb-2 me-2" (click)="editMode(post)">Edit</span>
 
             <!-- Comentarios de los posts -->
-            <div class="card-footer text-muted pt-4 pb-0 mb-0">
-                <div class="mb-4 ps-4" *ngFor="let comment of post.comments">
+            <div class="card-footer text-muted pt-4">
+                <!--<div class="mb-4 ps-4" *ngFor="let comment of post.comments">
                     <div class="blockquote-footer">
                         <cite class="Source Title mb-0">{{ comment.comment }}</cite>
                         <div class="small text-muted">
                             created: <span class=" small">{{ post.created_at | date:"EEEE, MMMM d, y" }}</span>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
+                <app-comment [postts]="post"></app-comment>
             </div>
         </div>
     </div>

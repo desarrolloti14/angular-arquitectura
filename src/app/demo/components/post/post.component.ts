@@ -29,7 +29,7 @@ export class PostComponent implements OnInit {
     body: ['', Validators.required]
   })
 
-  constructor( private api:ApiService, private fb: FormBuilder ) { }
+  constructor(private api: ApiService, private fb: FormBuilder ) { }
 
   ngOnInit(): void {
     this.getAllPost()
