@@ -1,5 +1,5 @@
 <!-- content -->
-<div class="row mb-5">
+<div class="row mb-5 pb-5">
     <div>
         <div class="col-md-12">
             <!-- Notificaciones sobre las acciones-->
@@ -12,26 +12,25 @@
         <div class="card">
             <div class="card-body">
                 <!-- Formulario para editar o agregar-->
-                <form class="mb-4" [formGroup]="formPost" (ngSubmit)="createPost(formPost.value)">
+                <form class="mb-4" [formGroup]="formPost" (ngSubmit)="createPost(formPost.value)" novalidate>
                     <input type="hidden" name="id" formControlName="id">
                     <div class="mb-3">
                         <label class="form-label">title</label>
-                        <input type="text" class="form-control" name="title" formControlName="title">
-                    </div>
-
-                    <div class="alert alert-danger"
-                        *ngIf="formPost.controls['title'].invalid && formPost.controls['title'].touched">
-                        title is required.
+                        <input type="text" class="form-control" name="title" formControlName="title" [ngClass]="{ 'border border-danger': postFormControl.title.touched && postFormControl.title.invalid }">
+                        <div class="text-danger">
+                            <span *ngIf="postFormControl.title.touched && postFormControl.title.errors?.required">The title is required</span>
+                            <span *ngIf="postFormControl.title.touched && postFormControl.title.errors?.maxlength">The title is long</span>
+                        </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">body</label>
-                        <input type="text" class="form-control" name="body" formControlName="body">
-                    </div>
-
-                    <div class="alert alert-danger"
-                        *ngIf="formPost.controls['body'].invalid && formPost.controls['body'].touched">
-                        title is required.
+                        <input type="text" class="form-control" name="body" formControlName="body" [ngClass]="{ 'border border-danger': postFormControl.body.touched && postFormControl.body.invalid }">
+                        <div class="text-danger">
+                            <span *ngIf="postFormControl.body.touched && postFormControl.body.errors?.required">The body is
+                                required</span>
+                            <span *ngIf="postFormControl.body.touched && postFormControl.body.errors?.maxlength">The body is long</span>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Public</button>
@@ -42,9 +41,10 @@
 
     <div class="col-md-6">
         <!-- Registros de posts -->
-        <div class="card mb-4" *ngFor="let post of posts">
+        <div class="card mb-4" *ngFor="let post of posts" >
             <!-- Informacionde posts -->
             <div class="card-body">
+                <!-- Info -->
                 <h5 class="card-title small mb-0">{{ post.title }}</h5>
                 <div class="small text-muted mb-3">
                     <div>
@@ -55,26 +55,17 @@
                     </div>
                 </div>
                 <p class="card-text small">{{ post.body }}</p>
-            </div>
 
-            <!-- Botones de acciones -->
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                (click)="deletePost(post.id)">
-                -
-            </span>
-            <span class="badge bg-success w-25 ms-auto mb-2 me-2" (click)="editMode(post)">Edit</span>
+                <!-- Botones de acciones -->
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    (click)="deletePost(post.id)">
+                    -
+                </span>
+                <span class="badge bg-success w-25 ms-auto mb-2 me-2" (click)="editMode(post)">Edit</span>
+            </div>
 
             <!-- Comentarios de los posts -->
             <div class="card-footer text-muted pt-4">
-                <!--<div class="mb-4 ps-4" *ngFor="let comment of post.comments">
-                    <div class="blockquote-footer">
-                        <cite class="Source Title mb-0">{{ comment.comment }}</cite>
-                        <div class="small text-muted">
-                            created: <span class=" small">{{ post.created_at | date:"EEEE, MMMM d, y" }}</span>
-                        </div>
-                    </div>
-                </div>-->
-
                 <app-comment [postts]="post"></app-comment>
             </div>
         </div>

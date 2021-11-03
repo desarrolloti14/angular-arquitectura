@@ -25,8 +25,8 @@ export class PostComponent implements OnInit {
   //Declaramos el Form group para usar nuestras validaciones
   formPost: FormGroup = this.fb.group({
     id: [''],
-    title: ['', Validators.required] ,
-    body: ['', Validators.required]
+    title: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(1)]] ,
+    body: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]]
   })
 
   constructor(private api: ApiService, private fb: FormBuilder ) { }
@@ -35,9 +35,16 @@ export class PostComponent implements OnInit {
     this.getAllPost()
   }
 
+  //Optener los controls del formulario
+  get postFormControl() {
+    return this.formPost.controls;
+  }
+
   //Funcion que nos ayuda a cambiar el estado de nuestro formulario
   editMode(post: Post) {
     this.edit = true
+    
+    //Llenamos el formulario con la selección
     this.formPost.setValue({
       id: post.id,
       title: post.title,
@@ -65,7 +72,7 @@ export class PostComponent implements OnInit {
         this.api.createPost(data).subscribe(
           res => {
             console.log("create: " + res),
-              this.getAllPost()
+            this.getAllPost()
             this.formPost.reset()
             this.alert = "Your post is publish"
           },

@@ -2,9 +2,10 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../../models/comment';
 import { ApiService } from '../../service/api.service';
+import { PostComponent } from '../post/post.component';
 
 @Component({
-  //providers: [PostComponent],
+  providers: [PostComponent],
   selector: 'app-comment',
   templateUrl: './comment.component.html',
 })
@@ -14,6 +15,8 @@ export class CommentComponent implements OnInit {
   @Input() postts: any;
 
   comments: any
+  secondM: any
+  diff: any
 
   //Declaramos una variable con el cuerpo de nuestro model
   comment: Comment = {
@@ -27,13 +30,27 @@ export class CommentComponent implements OnInit {
   //Declaramos el Form group para usar nuestras validaciones
   formComment: FormGroup = this.fb.group({
     id: [''],
-    comment: ['', Validators.required],
+    comment: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
   })
 
-  constructor(private fb: FormBuilder, private api :ApiService) { }
+  constructor(private fb: FormBuilder, private api :ApiService, private componentPost: PostComponent) { }
 
   ngOnInit(): void {
     this.getAllComment()
+  }
+
+  secondDiff(secondP: Date): any {
+    this.secondM = new Date()
+    this.diff = this.secondM.getSeconds() - secondP.getSeconds();
+    if (this.diff < 10) {
+      return "jajaja";
+    }
+    return "khsbvhdabv dsbvhev"
+  }
+
+  //Optener los controls del formulario
+  get commentFormControl() {
+    return this.formComment.controls;
   }
 
   getAllComment() {
@@ -45,18 +62,21 @@ export class CommentComponent implements OnInit {
 
   createComment(data: any) {
     //Concatenamos el objeto postts con data
-    data.post = this.postts;
-    delete data.post["comments"]
-    this.api.createComment(data).subscribe(
-      res => {
-        console.log("Create: " + res)
-        this.formComment.reset()
-        this.getAllComment()
-      },
-      error => {
-        console.log("Error: " + error)
-      }
-    );
+    this.formComment.markAllAsTouched() 
+    if (this.formComment.valid) {
+      data.post = this.postts;
+      delete data.post["comments"]
+      this.api.createComment(data).subscribe(
+        res => {
+          console.log("Create: " + res)
+          this.formComment.reset()
+          this.getAllComment()
+        },
+        error => {
+          console.log("Error: " + error)
+        }
+      );
+    }
   }
 
   deleteComment(id: number) {
