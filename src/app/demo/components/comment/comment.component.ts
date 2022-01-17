@@ -14,9 +14,10 @@ export class CommentComponent implements OnInit {
   //Objeto enviado por componente padre
   @Input() postts: any;
 
-  comments: any
-  secondM: any
-  diff: any
+  public comments: any
+  public secondM: any
+  public diff: any
+  public alert: Boolean = false
 
   //Declaramos una variable con el cuerpo de nuestro model
   comment: Comment = {
@@ -33,7 +34,11 @@ export class CommentComponent implements OnInit {
     comment: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]],
   })
 
-  constructor(private fb: FormBuilder, private api :ApiService, private componentPost: PostComponent) { }
+  constructor(
+    private fb: FormBuilder, 
+    private api :ApiService, 
+    private componentPost: PostComponent,
+    ) { }
 
   ngOnInit(): void {
     this.getAllComment()
@@ -68,12 +73,15 @@ export class CommentComponent implements OnInit {
       delete data.post["comments"]
       this.api.createComment(data).subscribe(
         res => {
+          this.alert = true
           console.log("Create: " + res)
           this.formComment.reset()
           this.getAllComment()
+          this.alert = false 
         },
         error => {
           console.log("Error: " + error)
+          //this.alertShow.alertShow("Error in publish your comment", 3)
         }
       );
     }
@@ -85,9 +93,11 @@ export class CommentComponent implements OnInit {
         console.log("Delete: " + res)
         this.formComment.reset()
         this.getAllComment()
+        //this.alertShow.alertShow("Your comment has been deleted", 3)
       },
       error => {
         console.log("Error: " + error)
+        //this.alertShow.alertShow("Error in deleted your comment", 3)
       }
     )
   }

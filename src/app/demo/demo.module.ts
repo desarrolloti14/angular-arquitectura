@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IndexComponent } from './components/index/index.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { CommentComponent } from './components/comment/comment.component';
     DemoRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class DemoModule { }

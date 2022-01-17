@@ -7,7 +7,7 @@ import { Post } from '../models/post';
 })
 export class ApiService {
 
-  url: string = "http://localhost:8080/api/demo/";
+  url: string = "http://localhost:8081/api/demo/";
 
   constructor( private http:HttpClient ) { }
 

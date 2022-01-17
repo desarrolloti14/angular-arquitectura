@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms'
+import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { Post } from '../../models/post';
 import { ApiService } from '../../service/api.service';
 
@@ -11,9 +12,8 @@ import { ApiService } from '../../service/api.service';
 export class PostComponent implements OnInit {
 
   //Variables globales
-  posts: any = []
-  alert: string = ""
-  edit: boolean = false
+  public posts: any = []
+  public edit: Boolean = false
 
   //Declaramos una variable con el cuerpo de nuestro model
   post: Post = {
@@ -29,7 +29,11 @@ export class PostComponent implements OnInit {
     body: ['', [Validators.required, Validators.maxLength(150), Validators.minLength(1)]]
   })
 
-  constructor(private api: ApiService, private fb: FormBuilder ) { }
+  constructor(
+    private api: ApiService, 
+    private fb: FormBuilder, 
+    public showAlert: AlertComponent   
+    ) { }
 
   ngOnInit(): void {
     this.getAllPost()
@@ -74,11 +78,11 @@ export class PostComponent implements OnInit {
             console.log("create: " + res),
             this.getAllPost()
             this.formPost.reset()
-            this.alert = "Your post is publish"
+            this.showAlert.alertShow("Your post has been published", 3)
           },
           error => {
             console.log(error)
-            this.alert = "Error in send post"
+            this.showAlert.alertShow("Error in send post", 3)
           }
         )
       } else {
@@ -87,11 +91,11 @@ export class PostComponent implements OnInit {
             console.log("edit: " + res),
             this.getAllPost()
             this.formPost.reset()
-            this.alert = "Your post is edit"
+            this.showAlert.alertShow("Your post is edit", 3)
           },
           error => {
             console.log(error)
-            this.alert = "Error in send post"
+            this.showAlert.alertShow("Error in send post", 3)
           }
         )
         this.edit = false
@@ -105,11 +109,11 @@ export class PostComponent implements OnInit {
       res => { 
         console.log("success") 
         this.getAllPost()
-        this.alert = "Your post is delete"
+        this.showAlert.alertShow("Your post is delete", 3)
       },
       error => { 
         console.log("error")
-        this.alert = "Error in delete your post "
+        this.showAlert.alertShow("Error in delete your post", 3)
       }
     )
   }
